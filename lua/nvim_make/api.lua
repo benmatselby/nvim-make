@@ -14,7 +14,7 @@ function M.execute(project_name, cmd)
 	local buf = vim.api.nvim_create_buf(false, true)
 
 	local width = 80
-	local height = 20
+	local height = 40
 	local opts = {
 		relative = "editor",
 		width = width,
@@ -25,6 +25,8 @@ function M.execute(project_name, cmd)
 		border = "rounded",
 		title = " " .. project_name .. " ",
 		title_pos = "center",
+		footer = "'q' close",
+		footer_pos = "center",
 		focusable = true,
 	}
 
@@ -48,7 +50,7 @@ function M.execute(project_name, cmd)
 
 	-- Close on <Esc> key in both normal and terminal modes
 	for _, mode in ipairs({ "n", "t" }) do
-		vim.keymap.set(mode, "<Esc>", function()
+		vim.keymap.set(mode, "q", function()
 			if vim.api.nvim_win_is_valid(win) then
 				vim.api.nvim_win_close(win, true)
 			end
