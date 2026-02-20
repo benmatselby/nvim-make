@@ -6,8 +6,14 @@ if vim.g.loaded_nvim_make then
 end
 vim.g.loaded_nvim_make = true
 
-vim.api.nvim_create_user_command("NvimMake", function()
-	require("nvim_make").pick_make_target()
+vim.api.nvim_create_user_command("NvimMake", function(cmd_opts)
+	local path = nil
+	if cmd_opts.args ~= "" then
+		path = cmd_opts.args
+	end
+	require("nvim_make").pick_make_target(path)
 end, {
+	nargs = "?",
+	complete = "dir",
 	desc = "Pick and run a make target",
 })

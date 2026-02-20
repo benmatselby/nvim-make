@@ -2,7 +2,7 @@
 
 This plugin aims to run Make targets from your project, if a Makefile is found.
 
-```
+```text
 ┌────────────────────────────────────────────────────────────────────┐
 │                                                                    │
 │                                                                    │
@@ -49,4 +49,24 @@ return {
     },
   },
 }
+```
+
+You can also provide a specific project path to target a Makefile in a different directory, bypassing the automatic discovery:
+
+```lua
+keys = {
+  {
+    "<leader>xp",
+    function()
+      require("nvim_make").pick_make_target("/path/to/project")
+    end,
+    desc = "Run make target for specific project",
+  },
+}
+```
+
+Or via the command:
+
+```text
+:NvimMake /path/to/project
 ```

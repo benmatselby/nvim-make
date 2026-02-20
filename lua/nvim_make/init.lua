@@ -37,14 +37,24 @@ function M.setup(opts)
 end
 
 --- Show a menu to pick a make target and run it.
-function M.pick_make_target()
-	local path = vim.fs.root(0, { "Makefile" })
+---@param path? string Optional path to the project containing a Makefile.
+---   If nil, the plugin will search for a Makefile from the current buffer's directory.
+function M.pick_make_target(path)
+	if not path then
+		path = vim.fs.root(0, { "Makefile" })
+	end
+
 	if not path then
 		vim.notify("No Makefile found in project root.", vim.log.levels.ERROR)
 		return
 	end
 
+	-- Normalize: remove any trailing slashes before extracting the basename
+	path = path:gsub("/+$", "")
 	local project_name = vim.fs.basename(path)
+	if not project_name or project_name == "" then
+		project_name = path
+	end
 
 	---@type string[]
 	local targets = get_make_targets(path)
@@ -54,7 +64,7 @@ function M.pick_make_target()
 		return
 	end
 
-	vim.ui.select(targets, { prompt = "Run make target:" }, function(choice)
+	vim.ui.select(targets, { prompt = project_name }, function(choice)
 		if choice then
 			local command = "make -C " .. path .. " " .. choice
 			api.execute(project_name, command)
