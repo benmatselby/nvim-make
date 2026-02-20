@@ -2,6 +2,26 @@
 
 This plugin aims to run Make targets from your project, if a Makefile is found.
 
+```
+┌────────────────────────────────────────────────────────────────────┐
+│                                                                    │
+│                                                                    │
+│       ╭──────────────────── my-project ────────────────────╮       │
+│       │ docker-build        Build the docker image         │       │
+│       │ docker-push         Push the docker image          │       │
+│       │ docker-run          Run the docker image           │       │
+│       │ install-ci          Install the CI dependencies    │       │
+│       │ install-dev         Install the dev dependencies   │       │
+│       │ lint                Lint the code with Ruff        │       │
+│       │ test                Run the tests                  │       │
+│       │                                                    │       │
+│       │ Finished command (exit code: 0)                    │       │
+│       ╰────────────────────────────────────────────────────╯       │
+│                                                                    │
+│                                                                    │
+└────────────────────────────────────────────────────────────────────┘
+```
+
 ## Prerequisites
 
 - Neovim >0.40
