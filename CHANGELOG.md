@@ -1,6 +1,6 @@
 # Changelog
 
-## next
+## 1.1.0
 
 - Allow user to specify the path to the Makefile.
 
