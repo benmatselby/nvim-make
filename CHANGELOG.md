@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+
+- Expand paths meaning you can do `~/my/path`.
+
 ## 1.1.0
 
 - Allow user to specify the path to the Makefile.
