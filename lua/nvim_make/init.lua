@@ -49,6 +49,8 @@ function M.pick_make_target(path)
 		return
 	end
 
+	path = vim.fn.expand(path)
+
 	-- Normalize: remove any trailing slashes before extracting the basename
 	path = path:gsub("/+$", "")
 	local project_name = vim.fs.basename(path)
