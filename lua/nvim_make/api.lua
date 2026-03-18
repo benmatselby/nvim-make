@@ -1,18 +1,19 @@
 local M = {}
 
 --- Call the command, and render output in a floating window.
--- @param cmd string: The command to execute.
-function M.execute(project_name, cmd)
+-- @param project_name string: The project name shown in the window title.
+-- @param cmd_parts table: A list where the first element is the executable and
+--   the remainder are its arguments. Passing a table avoids splitting on spaces,
+--   which would break paths that contain spaces.
+function M.execute(project_name, cmd_parts)
 	local ok, Job = pcall(require, "plenary.job")
 	if not ok then
 		vim.notify("nvim-make: plenary.nvim is required", vim.log.levels.ERROR)
 		return
 	end
 
-	-- Split command into parts for Job
-	local cmd_parts = vim.split(cmd, " ")
-	local command = table.remove(cmd_parts, 1)
-	local args = cmd_parts
+	local command = cmd_parts[1]
+	local args = { unpack(cmd_parts, 2) }
 
 	-- Create floating window with a terminal buffer for ANSI color support
 	local buf = vim.api.nvim_create_buf(false, true)
