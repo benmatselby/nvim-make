@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.0
+
+- Provide the ability to specify multiple targets
+
 ## 1.2.0
 
 - Expand paths meaning you can do `~/my/path`.
