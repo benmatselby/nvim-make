@@ -151,14 +151,16 @@ function M.pick_make_target(path)
 			-- cursor (single-select behaviour).
 			if #ordered == 0 then
 				if current then
-					local command = "make -C " .. resolved_path .. " " .. current.text
-					api.execute(project_name, command)
+					api.execute(project_name, { "make", "-C", resolved_path, current.text })
 				end
 				return
 			end
 
-			local command = "make -C " .. resolved_path .. " " .. table.concat(ordered, " ")
-			api.execute(project_name, command)
+			local cmd_parts = { "make", "-C", resolved_path }
+			for _, target in ipairs(ordered) do
+				table.insert(cmd_parts, target)
+			end
+			api.execute(project_name, cmd_parts)
 		end,
 	})
 end
