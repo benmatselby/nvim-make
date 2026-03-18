@@ -88,7 +88,9 @@ function M.send_output(chan, data)
 	end
 
 	vim.schedule(function()
-		vim.api.nvim_chan_send(chan, data .. "\r\n")
+		-- The window may have been closed before the job finished; guard
+		-- against sending to a dead channel to avoid surfacing an API error.
+		pcall(vim.api.nvim_chan_send, chan, data .. "\r\n")
 	end)
 end
 
