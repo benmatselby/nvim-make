@@ -27,7 +27,7 @@ multiple targets and then `<CR>` to run them in the order selected.
 
 ## Prerequisites
 
-- Neovim >0.40
+- Neovim >= 0.10
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - Required for async job execution
 - [snacks.nvim](https://github.com/folke/snacks.nvim) - Required for the picker
 
