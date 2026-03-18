@@ -53,7 +53,7 @@ function M.execute(project_name, cmd_parts)
 		end,
 	})
 
-	-- Close on <Esc> key in both normal and terminal modes
+	-- Close on <q> key in both normal and terminal modes
 	for _, mode in ipairs({ "n", "t" }) do
 		vim.keymap.set(mode, "q", function()
 			if vim.api.nvim_win_is_valid(win) then
