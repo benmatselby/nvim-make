@@ -15,5 +15,5 @@ vim.api.nvim_create_user_command("NvimMake", function(cmd_opts)
 end, {
 	nargs = "?",
 	complete = "dir",
-	desc = "Pick and run a make target",
+	desc = "Pick and run make targets",
 })

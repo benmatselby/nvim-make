@@ -22,10 +22,14 @@ This plugin aims to run Make targets from your project, if a Makefile is found.
 └────────────────────────────────────────────────────────────────────┘
 ```
 
+Press `<CR>` to run the target under the cursor, or use `<Tab>` to select
+multiple targets and then `<CR>` to run them in the order selected.
+
 ## Prerequisites
 
 - Neovim >0.40
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - Required for async job execution
+- [snacks.nvim](https://github.com/folke/snacks.nvim) - Required for the picker
 
 ## Configuration
 
@@ -36,6 +40,7 @@ return {
   "benmatselby/nvim-make",
   dependencies = {
     "nvim-lua/plenary.nvim",
+    "folke/snacks.nvim",
   },
   cmd = "NvimMake",
   opts = {},
@@ -45,7 +50,7 @@ return {
       function()
         require("nvim_make").pick_make_target()
       end,
-      desc = "Run make target",
+      desc = "Run make target(s)",
     },
   },
 }

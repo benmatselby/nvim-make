@@ -20,6 +20,16 @@ function M.check()
 		})
 	end
 
+	-- Check for snacks.nvim
+	local has_snacks, _ = pcall(require, "snacks")
+	if has_snacks then
+		vim.health.ok("snacks.nvim is installed")
+	else
+		vim.health.error("snacks.nvim is required but not found", {
+			"Install snacks.nvim: https://github.com/folke/snacks.nvim",
+		})
+	end
+
 	-- Check for make binary
 	if vim.fn.executable("make") == 1 then
 		vim.health.ok("make is available")

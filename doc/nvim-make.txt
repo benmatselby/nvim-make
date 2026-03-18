@@ -18,14 +18,18 @@ CONTENTS                                                  *nvim-make-contents*
 1. INTRODUCTION                                       *nvim-make-introduction*
 
 nvim-make is a Neovim plugin that lets you pick and run Make targets from a
-Makefile in your project. Targets are presented in a selection menu, and the
-output is displayed in a floating window.
+Makefile in your project. Targets are presented in a snacks.nvim picker, and
+the output is displayed in a floating window.
+
+Press <CR> to run the target under the cursor, or use <Tab> to select
+multiple targets and then <CR> to run them in the order selected.
 
 ==============================================================================
 2. REQUIREMENTS                                       *nvim-make-requirements*
 
 - Neovim >= 0.10
 - plenary.nvim (https://github.com/nvim-lua/plenary.nvim)
+- snacks.nvim (https://github.com/folke/snacks.nvim)
 - `make` executable in your PATH
 - A `Makefile` in your project root
 
@@ -36,7 +40,10 @@ Using lazy.nvim: >lua
 
     {
       "benmatselby/nvim-make",
-      dependencies = { "nvim-lua/plenary.nvim" },
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "folke/snacks.nvim",
+      },
       cmd = "NvimMake",
       opts = {},
     }
@@ -46,14 +53,20 @@ Using lazy.nvim: >lua
 4. USAGE                                                     *nvim-make-usage*
 
 Run `:NvimMake` to open a picker with all available Make targets from the
-nearest Makefile. Select a target to execute it. Output is shown in a floating
-window that closes when you press `<Esc>` or leave the window.
+nearest Makefile. Output is shown in a floating window that closes when you
+press `q` or leave the window.
+
+Press `<CR>` on a target to run it immediately (single-target mode).
+
+Press `<Tab>` to select one or more targets, then `<CR>` to run them all in
+the order they were selected, e.g. `make lint test`.
 
 ==============================================================================
 5. COMMANDS                                               *nvim-make-commands*
 
                                                                     *:NvimMake*
-:NvimMake           Open the Make target picker and run the selected target.
+:NvimMake [path]    Open the Make target picker. Optionally provide a path to
+                    a directory containing a Makefile.
 
 ==============================================================================
 6. CONFIGURATION                                     *nvim-make-configuration*
@@ -62,8 +75,6 @@ Call the setup function to configure the plugin: >lua
 
     require("nvim_make").setup({})
 <
-
-Currently the setup function initialises the path to the nearest Makefile.
 
 ==============================================================================
 7. HEALTH CHECK                                           *nvim-make-health*
