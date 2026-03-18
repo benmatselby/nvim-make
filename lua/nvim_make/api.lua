@@ -1,10 +1,14 @@
-local Job = require("plenary.job")
-
 local M = {}
 
 --- Call the command, and render output in a floating window.
 -- @param cmd string: The command to execute.
 function M.execute(project_name, cmd)
+	local ok, Job = pcall(require, "plenary.job")
+	if not ok then
+		vim.notify("nvim-make: plenary.nvim is required", vim.log.levels.ERROR)
+		return
+	end
+
 	-- Split command into parts for Job
 	local cmd_parts = vim.split(cmd, " ")
 	local command = table.remove(cmd_parts, 1)
